@@ -97,12 +97,6 @@ cb287298-1aeb-45ab-a179-94add613a3ee	7f851253-149c-4d04-ac32-1ddba935ced3	Eagles
 46a8ac01-2ac3-4d78-ae51-11da0033cd51	86f354be-3b81-4fa6-9542-ca5a4c4c8a4c	Kalingalinga (near)	t	2026-05-31 23:14:55.253281+00
 704b9bce-e9fc-408b-ba68-6334ac9c7a85	dca46b59-d332-4b68-b04f-98e56c2941f4	Emmasdale Estate	t	2026-05-31 23:14:55.796489+00
 0ab6fe38-2fe7-472c-810d-d6b2fedb5412	2201f244-29f7-46b3-a326-431508bfac9e	Garden Park Estate	t	2026-05-31 23:14:56.340221+00
-ae1820b7-3266-4940-aaf9-ced0c80159ae	b146afb5-09b2-4948-98fe-86d07a62a8bf	Standalone house (no estate)	t	2026-05-31 23:14:56.882789+00
-9be8cd70-0dee-43cf-b95d-4551274cc405	4f9cc640-d2d6-4ef0-b49a-efa66c821a23	Standalone house (no estate)	t	2026-05-31 23:14:57.421116+00
-da907b37-b3aa-4814-bd24-fed2b56ba822	daf2d966-e655-4ee5-9c02-cd00edd75769	Standalone house (no estate)	t	2026-05-31 23:14:57.958355+00
-c11c29b4-503f-4fee-bc85-8619afeac19b	34d0858c-04e9-4f3b-9f98-571653439606	Standalone house (no estate)	t	2026-05-31 23:14:58.499821+00
-d8936aed-a81d-4818-b10e-97035c4f3bed	aa115fad-1574-409a-8ed1-058d113d6117	Standalone house (no estate)	t	2026-05-31 23:14:59.041452+00
-5e44901f-c67e-483f-8fee-fafc072a746b	02afd2c5-25fa-4edf-acb9-75af63875e9c	Standalone house (no estate)	t	2026-05-31 23:14:59.583957+00
 \.
 
 -- Services catalog
