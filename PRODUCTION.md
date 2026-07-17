@@ -22,33 +22,42 @@ Local `C:\tumahelper\.env.local` currently points at **staging** (`vvqouitgiiosm
 
 ### Vercel Production env
 
+Prod uses Supabase **publishable** + **secret** keys:
+
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://bwmojebyakileueoraxs.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon key from prod dashboard>
-SUPABASE_SERVICE_ROLE_KEY=<service role — server only>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<sb_publishable_... from prod dashboard>
+SUPABASE_SERVICE_ROLE_KEY=<sb_secret_... from prod dashboard — server only>
 ```
+
+Never commit secret keys. Rotate any secret pasted into chat.
 
 ### Vercel Preview / local staging env
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://vvqouitgiiosmszqztxs.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon key from staging dashboard>
-SUPABASE_SERVICE_ROLE_KEY=<service role — server only>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<staging publishable or anon key>
+SUPABASE_SERVICE_ROLE_KEY=<staging secret — server only>
 ```
 
 Keys:
 - Prod: https://supabase.com/dashboard/project/bwmojebyakileueoraxs/settings/api
 - Staging: https://supabase.com/dashboard/project/vvqouitgiiosmszqztxs/settings/api
 
-### Apply migrations to production
+### Schema note (critical)
 
-```bash
-npx supabase login
-npx supabase link --project-ref bwmojebyakileueoraxs
-npx supabase db push
-```
+Production `bwmojebyakileueoraxs` uses the **current platform schema**, including:
 
-To target staging instead: `--project-ref vvqouitgiiosmszqztxs`
+- `users`, `worker_profiles`, `worker_references`
+- `bookings`, `job_posts`, `job_applications`
+- `payments`, `reviews`, `disputes`, `notifications`
+- `service_categories`, `verification_documents`, `audit_logs`
+
+It does **not** have older tables/RPCs from early migrations in this repo
+(`service_bookings`, `lusaka_areas`, `create_service_booking`, etc.).
+
+**Do not** run `supabase db push` of those older migrations against production
+unless there is an explicit, reviewed migration plan.
 
 ### Seed (local / reset only)
 
@@ -76,5 +85,5 @@ Do **not** blindly re-seed production.
 | Domain | https://tumahelper.com |
 | Host | Vercel (`walkers-projects-da1ff726`) |
 | App source | `C:\tumahelper` → GitHub `walu22/tumahelper` (private) |
-| Backend | Google Cloud Run (Vercel rewrite proxy — see app commit history) |
+| Backend | Google Cloud Run (Vercel rewrite proxy) |
 | Old VPS | `31.97.56.157` — no longer serves the domain |
