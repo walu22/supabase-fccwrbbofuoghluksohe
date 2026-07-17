@@ -7,8 +7,14 @@ marketplace for Lusaka, Zambia. It contains only the database layer — Postgres
 migrations, seed data, and local Supabase config. There is **no application/frontend code**
 here; the live client is a Next.js app on Vercel (`tumahelper.com`).
 
-**Active production database:** `bwmojebyakileueoraxs`
-(`https://bwmojebyakileueoraxs.supabase.co`). See `PRODUCTION.md`.
+**Databases (confirmed):**
+
+| Env | Ref | URL |
+|-----|-----|-----|
+| **Production** | `bwmojebyakileueoraxs` | https://bwmojebyakileueoraxs.supabase.co |
+| **Staging** | `vvqouitgiiosmszqztxs` | https://vvqouitgiiosmszqztxs.supabase.co |
+
+See `PRODUCTION.md` for Vercel/GCP env mapping.
 
 Everything is driven by the **Supabase CLI** + **Docker**:
 
@@ -19,9 +25,9 @@ Everything is driven by the **Supabase CLI** + **Docker**:
 ## Critical production facts
 
 1. Live site: **Vercel**, not the old Hostinger VPS.
-2. Production Supabase: **`bwmojebyakileueoraxs`** (not `fccwrbbofuoghluksohe`).
-3. App source should live in `walu22/tumahelper` once pushed from `C:\tumahelper`.
-4. GCP prod: `tumahelper-auth`; staging: `tumahelper-ai-dev`.
+2. Production Supabase: **`bwmojebyakileueoraxs`**. Staging: **`vvqouitgiiosmszqztxs`**.
+3. App source: `walu22/tumahelper` (private; from `C:\tumahelper`). Local `.env.local` uses staging by default.
+4. Backend: Google Cloud Run (proxied from Vercel). GCP prod: `tumahelper-auth`; staging: `tumahelper-ai-dev`.
 
 ## Cursor Cloud specific instructions
 

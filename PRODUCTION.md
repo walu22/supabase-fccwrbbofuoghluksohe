@@ -1,52 +1,65 @@
 # TumaHelper — production configuration
 
-## Active production Supabase (confirmed)
+## Supabase environments (confirmed)
 
-| Field | Value |
-|-------|--------|
-| **Project ref** | `bwmojebyakileueoraxs` |
-| **API URL** | `https://bwmojebyakileueoraxs.supabase.co` |
-| **Dashboard** | https://supabase.com/dashboard/project/bwmojebyakileueoraxs |
+| Environment | Project ref | URL |
+|-------------|-------------|-----|
+| **Production** | `bwmojebyakileueoraxs` | https://bwmojebyakileueoraxs.supabase.co |
+| **Staging** | `vvqouitgiiosmszqztxs` | https://vvqouitgiiosmszqztxs.supabase.co |
 
-Use this project for **tumahelper.com**, Vercel production env vars, and any backend API.
+| Dashboard (prod) | https://supabase.com/dashboard/project/bwmojebyakileueoraxs |
+| Dashboard (staging) | https://supabase.com/dashboard/project/vvqouitgiiosmszqztxs |
 
-### Vercel / Next.js env
+### What belongs where
+
+| Surface | Supabase |
+|---------|----------|
+| **tumahelper.com** (Vercel Production) | **prod** `bwmojebyakileueoraxs` |
+| Vercel Preview / local laptop default | **staging** `vvqouitgiiosmszqztxs` |
+| Google Cloud Run production backend | **prod** `bwmojebyakileueoraxs` |
+
+Local `C:\tumahelper\.env.local` currently points at **staging** (`vvqouitgiiosmszqztxs`) with prod commented out — that is correct for local/dev work.
+
+### Vercel Production env
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://bwmojebyakileueoraxs.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon key from dashboard>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon key from prod dashboard>
 SUPABASE_SERVICE_ROLE_KEY=<service role — server only>
 ```
 
-Keys: https://supabase.com/dashboard/project/bwmojebyakileueoraxs/settings/api
+### Vercel Preview / local staging env
 
-### Apply migrations from this repo to the active project
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://vvqouitgiiosmszqztxs.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon key from staging dashboard>
+SUPABASE_SERVICE_ROLE_KEY=<service role — server only>
+```
+
+Keys:
+- Prod: https://supabase.com/dashboard/project/bwmojebyakileueoraxs/settings/api
+- Staging: https://supabase.com/dashboard/project/vvqouitgiiosmszqztxs/settings/api
+
+### Apply migrations to production
 
 ```bash
-# From repo root
 npx supabase login
 npx supabase link --project-ref bwmojebyakileueoraxs
 npx supabase db push
 ```
 
-Review the diff carefully before confirming. Migrations in `supabase/migrations/` harden
-booking RLS, add `create_service_booking` / matching RPCs, and organise Lusaka locations.
+To target staging instead: `--project-ref vvqouitgiiosmszqztxs`
 
 ### Seed (local / reset only)
 
-`supabase/seed.sql` uses `COPY ... FROM stdin` — load with `psql`, not the CLI seed runner:
+`supabase/seed.sql` uses `COPY ... FROM stdin` — load with `psql`, not the CLI seed runner.
+Do **not** blindly re-seed production.
 
-```bash
-psql "$DATABASE_URL" -f supabase/seed.sql
-```
-
-Do **not** blindly re-seed production (it can overwrite catalog IDs).
-
-## Legacy projects (do not use for live users)
+## Legacy projects (do not use)
 
 | Ref | Notes |
 |-----|--------|
-| `fccwrbbofuoghluksohe` | Older "Tuma Helper New" project; original home of these migrations |
+| `fccwrbbofuoghluksohe` | Older project; original home of early migrations in this repo |
 | `bzvjqfxsuhisnuweenwu` | Retired Lovable / Namibia-era app |
 
 ## GCP
@@ -62,5 +75,6 @@ Do **not** blindly re-seed production (it can overwrite catalog IDs).
 |------|--------|
 | Domain | https://tumahelper.com |
 | Host | Vercel (`walkers-projects-da1ff726`) |
-| App source | Local `C:\tumahelper` — push to `walu22/tumahelper` when ready |
+| App source | `C:\tumahelper` → GitHub `walu22/tumahelper` (private) |
+| Backend | Google Cloud Run (Vercel rewrite proxy — see app commit history) |
 | Old VPS | `31.97.56.157` — no longer serves the domain |
